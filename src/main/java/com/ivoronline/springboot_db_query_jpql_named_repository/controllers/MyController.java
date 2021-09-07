@@ -2,7 +2,6 @@ package com.ivoronline.springboot_db_query_jpql_named_repository.controllers;
 
 import com.ivoronline.springboot_db_query_jpql_named_repository.entities.Person;
 import com.ivoronline.springboot_db_query_jpql_named_repository.repositories.PersonRepository;
-import com.ivoronline.springboot_db_query_jpql_named_repository.services.DBAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,15 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MyController {
 
-  @Autowired DBAccess         dbAccess;
   @Autowired PersonRepository personRepository;    //Only for INSERT
 
   //================================================================
-  // SELECT PERSON BY NAME AGE
+  // SELECT PERSON
   //================================================================
-  @RequestMapping("SelectPersonByNameAge")
-  Person selectPersonByNameAge() {
-    Person person = dbAccess.selectPersonByNameAge();
+  @RequestMapping("SelectPerson")
+  Person selectPerson() {
+    Person person = personRepository.selectPerson("John", 20);
     return person;
   }
 
@@ -27,7 +25,7 @@ public class MyController {
   //================================================================
   @RequestMapping("InsertPerson")
   String insertPerson() {
-    dbAccess.insertPerson();
+    personRepository.save(new Person("John" , 20));
     return "Person Inserted into DB";
   }
   //================================================================
@@ -35,7 +33,7 @@ public class MyController {
   //================================================================
   @RequestMapping("UpdatePerson")
   String updatePerson() {
-    Integer updatedRecords = dbAccess.updatePerson();
+    Integer updatedRecords = personRepository.updatePerson("John", 200);
     return  updatedRecords + " Records Updated";
   }
 
@@ -44,7 +42,7 @@ public class MyController {
   //================================================================
   @RequestMapping("DeletePerson")
   String deletePerson() {
-    Integer deletedRecords = dbAccess.deletePerson();
+    Integer deletedRecords = personRepository.deletePerson("John");
     return  deletedRecords + " Records Deleted";
   }
 
