@@ -25,8 +25,18 @@ public class MyController {
   //================================================================
   @RequestMapping("InsertPerson")
   String insertPerson() {
-    personRepository.save(new Person("John" , 20));
+
+    //CREATE PERSON
+    Person  person = new Person();
+            person.name = "John";
+            person.age = 20;
+
+    //SAVE PERSON
+    personRepository.save(person);
+
+    //RETURN PERSON
     return "Person Inserted into DB";
+
   }
   //================================================================
   // UPDATE PERSON

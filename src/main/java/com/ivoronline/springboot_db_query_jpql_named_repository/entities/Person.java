@@ -8,7 +8,7 @@ import javax.persistence.NamedQuery;
 
 //There is no INSERT since JPQL doesn't support INSERT. Records will be inserted through Repository.
 @NamedQuery(
-  name  = "Person.selectPersonByNameAge",
+  name  = "Person.selectPerson",
   query = "SELECT person FROM Person person WHERE person.name = ?1 AND person.age = ?2"
 )
 @NamedQuery(
@@ -28,12 +28,5 @@ public class Person {
   public Integer id;
   public String  name;
   public Integer age;
-
-  //CONSTRUCTORS
-  public Person() { }                        //Forced by @Entity
-  public Person(String name, Integer age) {  //Needed for JPQL
-    this.name = name;
-    this.age  = age;
-  }
 
 }
