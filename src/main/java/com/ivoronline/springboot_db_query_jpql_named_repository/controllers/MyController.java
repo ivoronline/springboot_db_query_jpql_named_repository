@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MyController {
 
-  @Autowired PersonRepository personRepository;    //Only for INSERT
+  //PROPERTIES
+  @Autowired PersonRepository personRepository;
 
   //================================================================
   // SELECT PERSON
@@ -20,24 +21,6 @@ public class MyController {
     return person;
   }
 
-  //================================================================
-  // INSERT PERSON
-  //================================================================
-  @RequestMapping("InsertPerson")
-  String insertPerson() {
-
-    //CREATE PERSON
-    Person  person = new Person();
-            person.name = "John";
-            person.age = 20;
-
-    //SAVE PERSON
-    personRepository.save(person);
-
-    //RETURN PERSON
-    return "Person Inserted into DB";
-
-  }
   //================================================================
   // UPDATE PERSON
   //================================================================
